@@ -5,7 +5,7 @@ using System.Collections;
 public class BGScaler : MonoBehaviour
 {
 
-    void Start()
+    void Awake()
     {
         // calculate the height
         var ratio = transform.localScale.x / transform.localScale.y;
