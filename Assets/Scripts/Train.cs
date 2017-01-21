@@ -3,8 +3,12 @@ using System.Collections;
 
 public class Train : MonoBehaviour {
 	public Wagon[] wagons = new Wagon[3];
-	private int currentWagon = 0;
 	public Passenger[] passengers = new Passenger[6];
+	private int currentWagon = 0;
+	public static int level {
+		get;
+		private set;
+	}
 
 	void Start () {
 	}
@@ -15,7 +19,10 @@ public class Train : MonoBehaviour {
 	}
 
 	public void Trick (bool success) {
-
+		if (!success) {
+			passengers[level].SetTired (true);
+			level++;
+		}
 	}
 	
 	void Update () {

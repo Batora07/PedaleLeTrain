@@ -11,9 +11,13 @@ public class Wagon : MonoBehaviour {
 		train = transform.parent.gameObject.GetComponent<Train> ();
 	}
 
-	public void LostPassenger () {
-		if (--passengersLeft <= 0) {
-			Detach ();
+	public void PassengerTired (bool tired) {
+		if (tired) {
+			if (--passengersLeft <= 0) {
+				Detach ();
+			}
+		} else {
+			passengersLeft++;
 		}
 	}
 
