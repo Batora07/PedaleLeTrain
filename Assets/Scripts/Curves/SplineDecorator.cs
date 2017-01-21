@@ -36,7 +36,7 @@ public class SplineDecorator : MonoBehaviour
 		}
 	}
 
-	void Start () {
+	public void Decorate () {
 		if (precision <= 0 || items == null || items.Length == 0 || overlap <= 0.0f) {
 			return;
 		}
@@ -75,6 +75,9 @@ public class SplineDecorator : MonoBehaviour
 				Debug.Log ("t is not getting bigger");
 				break;
 			}
+		}
+		for (i = n; i < links.Count; i++) {
+			links[i].SetActive (false);
 		}
 	}
 	/*

@@ -16,22 +16,8 @@ public class ElectricalLine : MonoBehaviour {
 		if (!spline) {
 			spline = GetComponent<BezierSpline> ();
 		}
-		float d = rightPole.position.x - leftPole.position.x;
-		spline.points[0] = leftPole.position;
-		spline.points[3] = rightPole.position;
-
-		Vector3 cpDirection = new Vector3 (d, - (d /= 3.0f) * 2.0f);
-
-		spline.points[1] = leftPole.position + Vector3.ClampMagnitude(cpDirection, d);
-		cpDirection.x = -cpDirection.x;
-		spline.points[2] = rightPole.position + Vector3.ClampMagnitude (cpDirection, d);
-
-		if (!lineRenderer) {
-			lineRenderer = GetComponent<LineRenderer> ();
-		}
-		lineRenderer.sortingLayerID = layerOrder;
-		curveCount = (int) spline.points.Length / 3;
 		GetComponent<SplineDecorator> ().enabled = true;
+		ResetLine ();
 	}
 
 	void Update () {
@@ -39,7 +25,24 @@ public class ElectricalLine : MonoBehaviour {
 	}
 
 	public void ResetLine () {
+		float d = rightPole.position.x - leftPole.position.x;
+		transform.position = leftPole.position;
+		spline.points[0] = leftPole.position;
+		spline.points[3] = rightPole.position;
 
+		Vector3 cpDirection = new Vector3 (d, -(d /= 3.0f) * 2.0f);
+		Vector3 verticalDifference = new Vector3 (0f, (leftPole.position.y - rightPole.position.y) / 3f);
+
+		spline.points[1] = leftPole.position + Vector3.ClampMagnitude (cpDirection, d) - verticalDifference;
+		cpDirection.x = -cpDirection.x;
+		spline.points[2] = rightPole.position + Vector3.ClampMagnitude (cpDirection, d) + verticalDifference;
+
+		if (!lineRenderer) {
+			lineRenderer = GetComponent<LineRenderer> ();
+		}
+		lineRenderer.sortingLayerID = layerOrder;
+		curveCount = (int) spline.points.Length / 3;
+		GetComponent<SplineDecorator> ().Decorate ();
 	}
 
 	void DrawCurve () {
