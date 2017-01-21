@@ -31,10 +31,15 @@ public class ElectricalLine : MonoBehaviour {
 		}
 		lineRenderer.sortingLayerID = layerOrder;
 		curveCount = (int) spline.points.Length / 3;
+		GetComponent<SplineDecorator> ().enabled = true;
 	}
 
 	void Update () {
 		DrawCurve ();
+	}
+
+	public void ResetLine () {
+
 	}
 
 	void DrawCurve () {
