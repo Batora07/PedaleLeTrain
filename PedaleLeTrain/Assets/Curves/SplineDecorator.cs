@@ -18,14 +18,21 @@ public class SplineDecorator : MonoBehaviour
 	private List<GameObject> links;
 	private List<float> linksT;
 
-	void Awake ()
-	{
+	void Awake () {
 		links = new List<GameObject> ();
 		linksT = new List<float> ();
 		extents = new Vector3[items.Length];
 		for (int i = 0; i < items.Length; ++i) {
-			//items [i].SetActive (true);
-			extents [i] = items [i].GetComponent<BoxCollider2D> ().bounds.extents * overlap;
+			items[i] = Instantiate (items[i]);
+			items[i].transform.parent = transform;
+			items [i].SetActive (false);
+
+			extents [i] = items [i].GetComponent<BoxCollider2D> ().size * overlap;
+			if (extents[i].y <= 0.0f) {
+				items = null;
+				Debug.Log ("Incorrect extents");
+				break;
+			}
 		}
 	}
 
@@ -40,6 +47,8 @@ public class SplineDecorator : MonoBehaviour
 		int i = 0;
 		int n = 0;
 		while (t <= 1.0f) {
+			float tmpT = t;
+
 			GameObject item;
 			if (links.Count <= n) {
 				item = Instantiate (items [i]);
@@ -49,17 +58,23 @@ public class SplineDecorator : MonoBehaviour
 			} else {
 				item = links [n];
 			}
+			item.SetActive (true);
 			Vector3 position = spline.GetPoint (t);
 			if (lookForward) {
 				Quaternion tmpRot = Quaternion.FromToRotation (Vector3.up, spline.GetDirection (t));
 				item.transform.rotation = tmpRot;
 			}
 			item.transform.position = position;
-			t = spline.GetT (t, extents [i].y, 10);
+			t = spline.GetT (t, extents [i].y, precision);
 
 			n++;
 			i++;
 			i %= items.Length;
+
+			if (tmpT == t) {
+				Debug.Log ("t is not getting bigger");
+				break;
+			}
 		}
 	}
 	/*
