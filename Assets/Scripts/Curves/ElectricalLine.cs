@@ -12,15 +12,19 @@ public class ElectricalLine : MonoBehaviour {
 	private int layerOrder = 0;
 	private int SEGMENT_COUNT = 50;
 	
-	void Start () {
+	void Awake () {
 		if (!spline) {
 			spline = GetComponent<BezierSpline> ();
-		}
-		GetComponent<SplineDecorator> ().enabled = true;
-		ResetLine ();
-	}
+        }
+    }
 
-	void Update () {
+    private void Start()
+    {
+        GetComponent<SplineDecorator>().enabled = true;
+        ResetLine();
+    }
+
+    void Update () {
 		DrawCurve ();
 	}
 
