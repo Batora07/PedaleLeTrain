@@ -25,7 +25,7 @@ public class SplineDecorator : MonoBehaviour
 		extents = new Vector3[items.Length];
 		for (int i = 0; i < items.Length; ++i) {
 			//items [i].SetActive (true);
-			extents [i] = items [i].GetComponent<SpriteRenderer> ().bounds.extents * overlap;
+			extents [i] = items [i].GetComponent<BoxCollider2D> ().bounds.extents * overlap;
 		}
 	}
 
@@ -62,7 +62,7 @@ public class SplineDecorator : MonoBehaviour
 			i %= items.Length;
 		}
 	}
-
+	/*
 	void Update () {
 		if (precision <= 0 || items == null || items.Length == 0 || overlap <= 0.0f) {
 			return;
@@ -95,8 +95,8 @@ public class SplineDecorator : MonoBehaviour
 			n++;
 			i++;
 			i %= items.Length;
-		}//*/
+		}
 		for (; n < links.Count; ++n)
 			links [n].SetActive (false);
-	}
+	}//*/
 }
