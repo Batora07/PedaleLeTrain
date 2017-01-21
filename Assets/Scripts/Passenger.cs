@@ -14,8 +14,8 @@ public class Passenger : MonoBehaviour {
 			GetComponent<Animator> ().Play (tired ? "tired" : "pedalling");
 		}
 	}
-	
-	void Update () {
-	
+
+	public void ChangeSpeed () {
+
 	}
 }

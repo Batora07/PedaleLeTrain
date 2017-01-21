@@ -9,6 +9,7 @@ public class Surfer : MonoBehaviour {
 	private int grounded = 0;
 	private bool turning = false;
 	private bool jumping = false;
+	private bool canjump = false;
 	public Train train;
 
 	public int currentSpeed = 0;
@@ -24,10 +25,11 @@ public class Surfer : MonoBehaviour {
 	}
 	
 	void Update () {
-		if (Input.GetButtonDown ("Jump") && grounded > 0) {
-			fallSpeed = speeds[currentSpeed];
+		if (Input.GetButtonDown ("Jump") && canjump) {
+			fallSpeed = speeds[currentSpeed] * 1.5f;
 			grounded = 0;
 			jumping = true;
+			canjump = false;
 		}
 		if (jumping) {
 			if (Input.GetButton ("Jump")) {
@@ -49,8 +51,9 @@ public class Surfer : MonoBehaviour {
         transform.position = new Vector3(startX, transform.position.y);
 		if (grounded > 0 || turning) {
 			float angle = Quaternion.Angle (transform.rotation, targetRotation);
-			if (angle <= 2.0f) {
+			if (angle <= 5.0f) {
 				turning = false;
+				canjump = true;
 			} else {
 				//Debug.Log (Quaternion.Angle (transform.rotation, targetRotation) + " : " + turnRate / angle * Time.deltaTime);
 				transform.rotation = Quaternion.Lerp (transform.rotation, targetRotation, turnRateLine / angle * Time.deltaTime);

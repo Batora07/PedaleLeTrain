@@ -28,7 +28,7 @@ public class Wagon : MonoBehaviour {
 
 	IEnumerator GoAway () {
 		for (;;) {
-			transform.Translate (driftSpeed, 0f, 0f);
+			transform.Translate (driftSpeed*Time.deltaTime, 0f, 0f);
 			if (lost)
 				break;
 			yield return null;
