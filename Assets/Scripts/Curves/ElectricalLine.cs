@@ -38,6 +38,10 @@ public class ElectricalLine : MonoBehaviour {
 		DrawCurve ();
 	}
 
+	public void ResetLine () {
+
+	}
+
 	void DrawCurve () {
 		for (int j = 0; j < curveCount; j++) {
 			for (int i = 1; i <= SEGMENT_COUNT; i++) {

@@ -11,7 +11,14 @@ public class Surfer : MonoBehaviour {
 	private Quaternion targetRotation;
 	private int grounded = 0;
 	private bool turning = false;
-	
+	private bool jumping = false;
+
+	public int currentSpeed = 0;
+	public float[] speeds = new float[6];
+	public float[] maxFallSpeeds = new float[6];
+	public float[] gravities = new float[6];
+	public float[] turnRates = new float[6];
+
 	void Start () {
 	}
 	
@@ -42,7 +49,7 @@ public class Surfer : MonoBehaviour {
 		Debug.Log (coll.gameObject);
 		turning = true;
 		if (grounded > 0) {
-			targetRotation = Quaternion.Lerp (coll.gameObject.transform.rotation * Quaternion.Euler (0f, 0f, 90), targetRotation, 0.5f);
+			targetRotation = Quaternion.Lerp (coll.gameObject.transform.rotation * Quaternion.Euler (0f, 0f, 90f), targetRotation, 0.5f);
 		} else {
 			targetRotation = coll.gameObject.transform.rotation * Quaternion.Euler (0f, 0f, 90f);
 		}
