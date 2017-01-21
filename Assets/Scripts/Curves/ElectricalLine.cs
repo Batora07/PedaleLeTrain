@@ -26,7 +26,7 @@ public class ElectricalLine : MonoBehaviour {
 
 	public void ResetLine () {
 		float d = rightPole.position.x - leftPole.position.x;
-		transform.position = leftPole.position;
+		transform.position = Vector3.zero;
 		spline.points[0] = leftPole.position;
 		spline.points[3] = rightPole.position;
 
@@ -42,7 +42,9 @@ public class ElectricalLine : MonoBehaviour {
 		}
 		lineRenderer.sortingLayerID = layerOrder;
 		curveCount = (int) spline.points.Length / 3;
+
 		GetComponent<SplineDecorator> ().Decorate ();
+		//transform.position = leftPole.position;
 	}
 
 	void DrawCurve () {

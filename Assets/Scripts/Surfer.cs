@@ -55,6 +55,9 @@ public class Surfer : MonoBehaviour {
 	//*
 	void OnCollisionEnter2D (Collision2D coll) {
 		//Debug.Log (coll.gameObject);
+		if (jumping) {
+			Debug.Log (Vector3.Angle (transform.right, coll.transform.up));
+		}
 		if (fallSpeed < 0) {
 			turning = true;
 			jumping = false;
