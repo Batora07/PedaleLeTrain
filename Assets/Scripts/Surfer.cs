@@ -9,6 +9,7 @@ public class Surfer : MonoBehaviour {
 	private int grounded = 0;
 	private bool turning = false;
 	private bool jumping = false;
+	public Train train;
 
 	public int currentSpeed = 0;
 	public float[] speeds = new float[6] { 4f, 2f, 3f, 4f, 5f, 6f };
@@ -56,7 +57,7 @@ public class Surfer : MonoBehaviour {
 	void OnCollisionEnter2D (Collision2D coll) {
 		//Debug.Log (coll.gameObject);
 		if (jumping) {
-			Debug.Log (Vector3.Angle (transform.right, coll.transform.up));
+			train.Trick (Vector3.Angle (transform.right, coll.transform.up) < 90);
 		}
 		if (fallSpeed < 0) {
 			turning = true;
