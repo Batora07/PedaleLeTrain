@@ -6,17 +6,12 @@ public class BGScaler : MonoBehaviour {
 
 	void Start () {
         // calculate the height
+        var ratio = transform.localScale.x / transform.localScale.y;
         var height = Camera.main.orthographicSize * 2f;
-        var width = height * Screen.width / Screen.height;
 
-        if(gameObject.name == "Background")
+        if(gameObject.tag == "Background")
         {
-            transform.localScale = new Vector3(width, height, 0); 
-        }
-        else
-        {
-            // Second parameter is for the fixed bottom ground / train
-            transform.localScale = new Vector3(width + 3f, 5, 0);
+            transform.localScale = new Vector3(height*ratio, height, 0); 
         }
     }
 	
