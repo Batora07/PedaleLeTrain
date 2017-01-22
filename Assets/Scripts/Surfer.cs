@@ -18,27 +18,28 @@ public class Surfer : MonoBehaviour {
 	public float[] gravities = new float[6] { 9.81f, 9.81f, 9.81f, 9.81f, 9.81f, 9.81f };
 	public float[] turnRatesJump = new float[6] { 360.0f, 360.0f, 360.0f, 360.0f, 360.0f, 360.0f };
 
-    private float startX;
+	private float startX;
 
 	void Awake () {
-        startX = transform.position.x;
+		startX = transform.position.x;
 	}
-	
+
 	void Update () {
-		if (Input.GetButtonDown ("Jump") && canjump) {
+		if (Input.GetButtonDown ("Jump") && canjump && !jumping) {
+			GetComponent<Animator> ().Play ("jump");
 			fallSpeed = speeds[currentSpeed] * 1.5f;
 			grounded = 0;
 			jumping = true;
+			turning = false;
 			canjump = false;
 		}
 		if (jumping) {
 			if (Input.GetButton ("Jump")) {
 				transform.RotateAround (GetComponent<Collider2D> ().bounds.center, Vector3.back, -turnRatesJump[currentSpeed] * Time.deltaTime);
 			} else {
-				float angle = Quaternion.Angle (transform.rotation, Quaternion.identity);/*
-				transform.rotation = Quaternion.Lerp (transform.rotation, Quaternion.identity, turnRatesJump[currentSpeed] / angle * Time.deltaTime);/*/
+				float angle = Quaternion.Angle (transform.rotation, Quaternion.identity);
 				if (angle > 2.0f)
-					transform.RotateAround (GetComponent<Collider2D> ().bounds.center, Vector3.back, (transform.right.y > 0 ? 1f : -1f) * turnRatesJump[currentSpeed] * Time.deltaTime);//*/
+					transform.RotateAround (GetComponent<Collider2D> ().bounds.center, Vector3.back, (transform.right.y > 0 ? 1f : -1f) * turnRatesJump[currentSpeed] * Time.deltaTime);
 			}
 		}
 		if (grounded > 0) {
@@ -48,25 +49,26 @@ public class Surfer : MonoBehaviour {
 			fallSpeed = Mathf.Max (maxFallSpeed, fallSpeed);
 		}
 		transform.position += new Vector3 (0f, grounded > 0 ? 0f : fallSpeed * Time.deltaTime);
-        transform.position = new Vector3(startX, transform.position.y);
+		transform.position = new Vector3 (startX, transform.position.y);
 		if (grounded > 0 || turning) {
 			float angle = Quaternion.Angle (transform.rotation, targetRotation);
 			if (angle <= 5.0f) {
 				turning = false;
 				canjump = true;
 			} else {
-				//Debug.Log (Quaternion.Angle (transform.rotation, targetRotation) + " : " + turnRate / angle * Time.deltaTime);
 				transform.rotation = Quaternion.Lerp (transform.rotation, targetRotation, turnRateLine / angle * Time.deltaTime);
 			}
 		}
 	}
-	//*
+
 	void OnCollisionEnter2D (Collision2D coll) {
-		//Debug.Log (coll.gameObject);
-		if (jumping && train) {
-			train.Trick (Vector3.Angle (transform.right, coll.transform.up) < 90);
-		}
-		if (fallSpeed < 0) {
+		if (fallSpeed < 0 || grounded <= 0) {
+			if (jumping && !turning) {
+				bool success = Vector3.Angle (transform.right, coll.transform.up) < 90;
+				train.Trick (success);
+				if (!success)
+					GetComponent<Animator> ().Play ("ouch");
+			}
 			turning = true;
 			jumping = false;
 		}
@@ -81,24 +83,5 @@ public class Surfer : MonoBehaviour {
 	void OnCollisionExit2D (Collision2D coll) {
 		if (grounded > 0)
 			grounded--;
-		/*
-		if (coll.contacts[0].point.y > transform.position.y) {
-			transform.position = new Vector3 (transform.position.x, coll.contacts[0].point.y);
-		}//*/
 	}
-	/*/
-	void OnTriggerEnter2D (Collider2D other) {
-		turning = true;
-		if (grounded > 0) {
-			targetRotation = Quaternion.Lerp (other.transform.rotation * Quaternion.Euler (0f, 0f, 90), targetRotation, 0.5f);
-		} else {
-			targetRotation = other.transform.rotation * Quaternion.Euler (0f, 0f, 90);
-		}
-		grounded++;
-	}
-
-	void OnTriggerExit2D (Collider2D other) {
-		if (grounded > 0)
-			grounded--;
-	}//*/
 }
