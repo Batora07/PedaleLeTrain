@@ -68,14 +68,14 @@ public class Train : MonoBehaviour {
 		}
 	}
 
-	public void Trick (bool success, int value) {//*
+	public void Trick (bool success, int value) {/*
 		Debug.Log ("------------------");
 		Debug.Log ("Level : " + level);
 		Debug.Log ("Wagon : " + currentWagon);//*/
 		if (success) {
 			audio.clip = cheers[Random.Range(0, cheers.Count)];
 			audio.Play();
-			if (level > 0 && level / 2 == (level - 1) / 2) {
+			if (value > 0 && level > 0 && level / 2 == (level - 1) / 2) {
 				level--;
 				passengers[level].SetTired (false);
 			}
