@@ -12,7 +12,7 @@ public class DecorSpawner : MonoBehaviour {
 
     private List<GameObject> decorSpawning = new List<GameObject>();
 
-
+	private float nextSpawn = float.MaxValue;
 
     private void Awake()
     {
@@ -21,8 +21,25 @@ public class DecorSpawner : MonoBehaviour {
 
     void Start()
     {
-        StartCoroutine(SpawnRandomDecor());
-    }
+		//StartCoroutine(SpawnRandomDecor());
+		nextSpawn = Time.time + Random.Range (beginTimeRandom, endTimeRandom);
+	}
+
+	void Update () {
+		if (Time.time >= nextSpawn) {
+			int index = Random.Range (0, decorSpawning.Count);
+			while (true) {
+				if (!decorSpawning[index].activeInHierarchy) {
+					decorSpawning[index].SetActive (true);
+					decorSpawning[index].transform.position = new Vector3 (transform.position.x, transform.position.y, changeZIndex);
+					break;
+				} else {
+					index = Random.Range (0, decorSpawning.Count);
+				}
+			}
+			nextSpawn = Time.time + Random.Range (beginTimeRandom, endTimeRandom);
+		}
+	}
 
     void InitializeDecorElements()
     {

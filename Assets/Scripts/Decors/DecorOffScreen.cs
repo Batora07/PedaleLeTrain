@@ -9,6 +9,8 @@ public class DecorOffScreen : MonoBehaviour {
 			ps.PoleDisappeared (other.gameObject);
 		} else if (other.tag == "Collector") {
 			Destroy (other.gameObject);
+		} else if (other.tag == "Decor") {
+			other.gameObject.SetActive (false);
 		}
 	}
 }
