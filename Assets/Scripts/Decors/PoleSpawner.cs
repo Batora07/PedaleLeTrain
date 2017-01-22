@@ -31,7 +31,7 @@ public class PoleSpawner : MonoBehaviour
 		el.rightPole = poles[firstPole].transform;
 		//random
 		float randX = Random.Range(4f, 5f);// Random.Range(Camera.main.gameObject.GetComponent<BoxCollider2D>().size.x/2f, Camera.main.gameObject.GetComponent<BoxCollider2D>().size.x/1.5f);
-		float randY = Random.Range(1f, 4f);
+		float randY = Random.Range(-2f, 2.5f);
 		lastPole.transform.position = poles[firstPole - 1 >= 0 ? firstPole - 1 : poles.Length - 1].transform.position + new Vector3(randX, 0f, 0f);
 		lastPole.transform.position = new Vector3(lastPole.transform.position.x, randY, 0f);
 
