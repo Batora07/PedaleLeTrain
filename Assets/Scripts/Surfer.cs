@@ -27,6 +27,8 @@ public class Surfer : MonoBehaviour {
 
 	private float startX;
 
+	private float trickRotation = 0f;
+
 	void Awake () {
 		startX = transform.position.x;
 	}
@@ -34,7 +36,7 @@ public class Surfer : MonoBehaviour {
 	void Update () {
 		if (Input.GetButtonDown ("Jump") && canjump && !jumping) {
 			GetComponent<Animator> ().Play ("jump");
-			fallSpeed = speeds[Train.level] * 1.5f;
+			fallSpeed = speeds[Train.level];
 			grounded = 0;
 			jumping = true;
 			turning = false;
@@ -43,13 +45,18 @@ public class Surfer : MonoBehaviour {
 
         /* Inputs mobile*/
         MobileJump();
-        if (jumping) {
+		if (jumping) {
 			if (Input.GetButton ("Jump") || Input.touchCount > 0) {
-				transform.RotateAround (GetComponent<Collider2D> ().bounds.center, Vector3.back, -turnRatesJump[currentSpeed] * Time.deltaTime);
+				float angle = -turnRatesJump[currentSpeed] * Time.deltaTime;
+				transform.RotateAround (GetComponent<Collider2D> ().bounds.center, Vector3.back, angle);
+				trickRotation += angle;
 			} else {
 				float angle = Quaternion.Angle (transform.rotation, Quaternion.identity);
-				if (angle > 2.0f)
-					transform.RotateAround (GetComponent<Collider2D> ().bounds.center, Vector3.back, (transform.right.y > 0 ? 1f : -1f) * turnRatesJump[Train.level] * Time.deltaTime);
+				if (angle > 2.0f) {
+					angle = (transform.right.y > 0 ? 1f : -1f) * turnRatesJump[Train.level] * Time.deltaTime;
+					transform.RotateAround (GetComponent<Collider2D> ().bounds.center, Vector3.back, angle);
+					trickRotation += angle;
+				}
 			}
 		}
 		if (grounded > 0) {
@@ -75,12 +82,20 @@ public class Surfer : MonoBehaviour {
 		if (fallSpeed < 0 || grounded <= 0) {
 			if (jumping && !turning) {
 				bool success = Vector3.Angle (transform.right, coll.transform.up) < 90;
-				train.Trick (success);
-				if (!success)
+				int score = 0;
+				if (success) {
+					int rotations = (int) ((trickRotation - 90f) / -360f);
+					for (int i = 1, j = 1; i <= rotations; i++, j += i) {
+						score += j * 10;
+					}
+				} else {
 					GetComponent<Animator> ().Play ("ouch");
+				}
+				train.Trick (success, score);
 			}
 			turning = true;
 			jumping = false;
+			trickRotation = 0f;
 		}
 		if (grounded > 0) {
 			targetRotation = Quaternion.Lerp (coll.gameObject.transform.rotation * Quaternion.Euler (0f, 0f, 90f), targetRotation, 0.5f);
@@ -91,8 +106,9 @@ public class Surfer : MonoBehaviour {
 	}
 
 	void OnCollisionExit2D (Collision2D coll) {
-		if (grounded > 0)
+		if (grounded > 0) {
 			grounded--;
+		}
 	}
 
     public void MobileJump()
@@ -105,7 +121,7 @@ public class Surfer : MonoBehaviour {
                 return;
             }
             GetComponent<Animator>().Play("jump");
-            fallSpeed = speeds[currentSpeed] * 1.5f;
+            fallSpeed = speeds[currentSpeed];
             grounded = 0;
             jumping = true;
             turning = false;
