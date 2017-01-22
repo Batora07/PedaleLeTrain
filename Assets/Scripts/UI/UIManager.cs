@@ -41,10 +41,10 @@ public class UIManager : MonoBehaviour
     {
         textPauseGame = GameObject.Find("PauseTextMessageOnScreen");
         pauseRestartInput = GameObject.Find("PauseRestartInput");
-        if (textPauseGame != null)
-        {
+        if (textPauseGame != null){
             textPauseGame.GetComponent<Text>().enabled = false;
         }
+
     }
 
     //Reloads the Level
