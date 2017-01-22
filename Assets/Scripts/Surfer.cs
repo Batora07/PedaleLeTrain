@@ -101,6 +101,7 @@ public class Surfer : MonoBehaviour {
             {
                 return;
             }
+            GetComponent<Animator>().Play("jump");
             fallSpeed = speeds[currentSpeed] * 1.5f;
             grounded = 0;
             jumping = true;
