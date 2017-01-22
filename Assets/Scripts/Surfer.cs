@@ -101,9 +101,11 @@ public class Surfer : MonoBehaviour {
             {
                 return;
             }
-            fallSpeed = speeds[currentSpeed];
+            fallSpeed = speeds[currentSpeed] * 1.5f;
             grounded = 0;
             jumping = true;
+            turning = false;
+            canjump = false;
         }
     }
 }
