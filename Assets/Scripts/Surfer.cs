@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class Surfer : MonoBehaviour {
 	public float fallSpeed = 0f;
@@ -11,8 +13,11 @@ public class Surfer : MonoBehaviour {
 	private bool jumping = false;
 	private bool canjump = false;
 	public Train train;
+    private Button pauseButton;
+    private bool paused;
+    private UIManager uimanager;
 
-	public int currentSpeed = 0;
+    public int currentSpeed = 0;
 	public float[] speeds = new float[6] { 4f, 2f, 3f, 4f, 5f, 6f };
 	public float[] maxFallSpeeds = new float[6];
 	public float[] gravities = new float[6] { 9.81f, 9.81f, 9.81f, 9.81f, 9.81f, 9.81f };
@@ -22,7 +27,9 @@ public class Surfer : MonoBehaviour {
 
 	void Awake () {
 		startX = transform.position.x;
-	}
+        uimanager = UIManager.Instance;
+        pauseButton = GameObject.Find("PauseRestartInput").GetComponent<Button>();
+    }
 
 	void Update () {
 		if (Input.GetButtonDown ("Jump") && canjump && !jumping) {
@@ -33,8 +40,10 @@ public class Surfer : MonoBehaviour {
 			turning = false;
 			canjump = false;
 		}
-		if (jumping) {
-			if (Input.GetButton ("Jump")) {
+        /* Inputs mobile*/
+        MobileJump();
+        if (jumping) {
+			if (Input.GetButton ("Jump") || Input.touchCount > 0) {
 				transform.RotateAround (GetComponent<Collider2D> ().bounds.center, Vector3.back, -turnRatesJump[currentSpeed] * Time.deltaTime);
 			} else {
 				float angle = Quaternion.Angle (transform.rotation, Quaternion.identity);
@@ -84,4 +93,18 @@ public class Surfer : MonoBehaviour {
 		if (grounded > 0)
 			grounded--;
 	}
+    public void MobileJump()
+    {
+        if (Input.touchCount > 0 && grounded > 0)
+        {
+            if (EventSystem.current.lastSelectedGameObject == GameObject.Find("PauseRestartInput") ||
+                EventSystem.current.currentSelectedGameObject == GameObject.Find("PauseRestartInput"))
+            {
+                return;
+            }
+            fallSpeed = speeds[currentSpeed];
+            grounded = 0;
+            jumping = true;
+        }
+    }
 }
