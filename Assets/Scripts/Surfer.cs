@@ -40,50 +40,43 @@ public class Surfer : MonoBehaviour {
             turning = false;
             canjump = false;
         }
+        /* Inputs mobile*/
+        MobileJump();
         if (jumping)
         {
-            if (Input.GetButton("Jump"))
+            if (Input.GetButton("Jump") || Input.touchCount > 0)
             {
-                transform.RotateAround(GetComponent<Collider2D>().bounds.center, Vector3.back, -turnRatesJump[Train.level] * Time.deltaTime);
-                /* Inputs mobile*/
-                MobileJump();
-                if (jumping)
-                {
-                    if (Input.GetButton("Jump") || Input.touchCount > 0)
-                    {
-                        transform.RotateAround(GetComponent<Collider2D>().bounds.center, Vector3.back, -turnRatesJump[currentSpeed] * Time.deltaTime);
-                    }
-                    else
-                    {
-                        float angle = Quaternion.Angle(transform.rotation, Quaternion.identity);
-                        if (angle > 2.0f)
-                            transform.RotateAround(GetComponent<Collider2D>().bounds.center, Vector3.back, (transform.right.y > 0 ? 1f : -1f) * turnRatesJump[Train.level] * Time.deltaTime);
-                    }
-                }
-                if (grounded > 0)
-                {
-                    fallSpeed = Mathf.Max(0f, fallSpeed);
-                }
-                else
-                {
-                    fallSpeed -= gravities[Train.level] * Time.deltaTime;
-                    fallSpeed = Mathf.Max(maxFallSpeed, fallSpeed);
-                }
-                transform.position += new Vector3(0f, grounded > 0 ? 0f : fallSpeed * Time.deltaTime);
-                transform.position = new Vector3(startX, transform.position.y);
-                if (grounded > 0 || turning)
-                {
-                    float angle = Quaternion.Angle(transform.rotation, targetRotation);
-                    if (angle <= 5.0f)
-                    {
-                        turning = false;
-                        canjump = true;
-                    }
-                    else
-                    {
-                        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, turnRateLine / angle * Time.deltaTime);
-                    }
-                }
+                transform.RotateAround(GetComponent<Collider2D>().bounds.center, Vector3.back, -turnRatesJump[currentSpeed] * Time.deltaTime);
+            }
+            else
+            {
+                float angle = Quaternion.Angle(transform.rotation, Quaternion.identity);
+                if (angle > 2.0f)
+                    transform.RotateAround(GetComponent<Collider2D>().bounds.center, Vector3.back, (transform.right.y > 0 ? 1f : -1f) * turnRatesJump[Train.level] * Time.deltaTime);
+            }
+        }
+        if (grounded > 0)
+        {
+            fallSpeed = Mathf.Max(0f, fallSpeed);
+        }
+        else
+        {
+            fallSpeed -= gravities[Train.level] * Time.deltaTime;
+            fallSpeed = Mathf.Max(maxFallSpeed, fallSpeed);
+        }
+        transform.position += new Vector3(0f, grounded > 0 ? 0f : fallSpeed * Time.deltaTime);
+        transform.position = new Vector3(startX, transform.position.y);
+        if (grounded > 0 || turning)
+        {
+            float angle = Quaternion.Angle(transform.rotation, targetRotation);
+            if (angle <= 5.0f)
+            {
+                turning = false;
+                canjump = true;
+            }
+            else
+            {
+                transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, turnRateLine / angle * Time.deltaTime);
             }
         }
     }
