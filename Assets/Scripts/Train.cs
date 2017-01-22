@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using System;
 
 public class Train : MonoBehaviour {
 	public Wagon[] wagons = new Wagon[3];
@@ -20,6 +19,31 @@ public class Train : MonoBehaviour {
 		private set;
 	}
 	public float[] scales = new float[6] { .5f, .6f, .7f, .8f, .9f, 1f };
+
+	private List<AudioClip> boos;
+	private List<AudioClip> cheers;
+	private AudioSource audio;
+
+	private void Awake()
+	{
+		audio = GetComponent<AudioSource>();
+		boos = new List<AudioClip>();
+		cheers = new List<AudioClip>();
+		for (int i = 1; ; i++)
+		{
+			var clip = Resources.Load("Audio/Finals/Boo" + i);
+			if (clip == null)
+				break;
+			boos.Add(clip as AudioClip);
+		}
+		for (int i = 1; ; i++)
+		{
+			var clip = Resources.Load("Audio/Finals/Cheer" + i);
+			if (clip == null)
+				break;
+			cheers.Add(clip as AudioClip);
+		}
+	}
 
 	void Start () {
 		level = 0;
@@ -49,12 +73,17 @@ public class Train : MonoBehaviour {
 		Debug.Log ("Level : " + level);
 		Debug.Log ("Wagon : " + currentWagon);//*/
 		if (success) {
+			audio.clip = cheers[Random.Range(0, cheers.Count)];
+			audio.Play();
 			if (level > 0 && level / 2 == (level - 1) / 2) {
 				level--;
 				passengers[level].SetTired (false);
 			}
 			score += value;
-		} else {
+		} else
+		{
+			audio.clip = boos[Random.Range(0, boos.Count)];
+			audio.Play();
 			passengers[level].SetTired (true);
 			if (level / 2 != (level + 1) / 2) {
 				DetachWagon ();
