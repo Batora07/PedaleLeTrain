@@ -94,7 +94,7 @@ public class Surfer : MonoBehaviour {
 
     public void MobileJump()
     {
-        if (Input.touchCount > 0 && grounded > 0)
+        if (Input.touchCount > 0 && canjump && !jumping)
         {
             if (EventSystem.current.lastSelectedGameObject == GameObject.Find("PauseRestartInput") ||
                 EventSystem.current.currentSelectedGameObject == GameObject.Find("PauseRestartInput"))
