@@ -6,7 +6,6 @@ public class MusicScript : MonoBehaviour
 {
 	void Awake()
 	{
-		Debug.Log("AWAAAAKE");
 		DontDestroyOnLoad(GameObject.Find("Soundscape"));
 	}
 }
