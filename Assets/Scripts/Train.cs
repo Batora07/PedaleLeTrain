@@ -98,4 +98,8 @@ public class Train : MonoBehaviour {
 			scrolling[i].scale = scales[level];
 		}
 	}
+
+	public static void AddScore (int value) {
+		score += value;
+	}
 }

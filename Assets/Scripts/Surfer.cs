@@ -21,7 +21,6 @@ public class Surfer : MonoBehaviour {
     public int currentSpeed = 0;
 
 	public float[] speeds = new float[6] { 4f, 2f, 3f, 4f, 5f, 6f };
-	public float[] maxFallSpeeds = new float[6];
 	public float[] gravities = new float[6] { 9.81f, 9.81f, 9.81f, 9.81f, 9.81f, 9.81f };
 	public float[] turnRatesJump = new float[6] { 360.0f, 360.0f, 360.0f, 360.0f, 360.0f, 360.0f };
 
@@ -79,6 +78,11 @@ public class Surfer : MonoBehaviour {
 	}
 
 	void OnCollisionEnter2D (Collision2D coll) {
+		if (coll.gameObject.tag == "Collector") {
+			Destroy (coll.gameObject);
+			Train.AddScore (5);
+			return;
+		}
 		if (fallSpeed < 0 || grounded <= 0) {
 			if (jumping && !turning) {
 				bool success = Vector3.Angle (transform.right, coll.transform.up) < 90;

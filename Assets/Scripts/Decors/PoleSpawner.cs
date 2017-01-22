@@ -17,6 +17,8 @@ public class PoleSpawner : MonoBehaviour
 	[SerializeField]
 	public GameObject[] lines = new GameObject[7];
 
+	public GameObject[] patterns = new GameObject[3];
+
 	GameObject lastPole = null;
 
 	//private List<GameObject> polesSpawning = new List<GameObject>();
@@ -42,6 +44,14 @@ public class PoleSpawner : MonoBehaviour
 		lastPole.transform.localScale = Vector3.one;
 		float poleScale = poleHeight / lastPole.GetComponent<BoxCollider2D>().size.y;
 		lastPole.transform.localScale = new Vector3(1f, poleScale);
+
+		if (Random.Range (0f, 1f) > .5f) {
+			Vector3 pos = poles[firstPole - 1 >= 0 ? firstPole - 1 : poles.Length - 1].transform.position;
+			pos += lastPole.transform.position;
+			pos /= 2f;
+			pos += new Vector3 (0f, Random.Range (.5f, 1.5f));
+			GameObject obj = Instantiate (patterns[Random.Range (0, patterns.Length)], pos, Quaternion.identity) as GameObject;
+		}
 
 		lastPole = pole;
 
