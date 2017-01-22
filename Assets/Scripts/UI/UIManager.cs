@@ -62,13 +62,13 @@ public class UIManager : MonoBehaviour
         {
             Time.timeScale = 0;
             textPauseGame.GetComponent<Text>().enabled = true;
-            pauseRestartInput.GetComponent<Image>().sprite = Resources.Load<Sprite>("Icon_RePlay");
+            pauseRestartInput.GetComponent<Image>().sprite = Resources.Load<Sprite>("Play_button");
         }
         else if (!paused)
         {
             Time.timeScale = 1;
             textPauseGame.GetComponent<Text>().enabled = false;
-            pauseRestartInput.GetComponent<Image>().sprite = Resources.Load<Sprite>("Icon_Pause");
+            pauseRestartInput.GetComponent<Image>().sprite = Resources.Load<Sprite>("Pause_button");
         }
 
     }
