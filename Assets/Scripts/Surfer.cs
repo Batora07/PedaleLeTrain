@@ -13,11 +13,15 @@ public class Surfer : MonoBehaviour {
 	private bool jumping = false;
 	private bool canjump = false;
 	public Train train;
+<<<<<<< HEAD
+	
+=======
     private Button pauseButton;
     private bool paused;
     private UIManager uimanager;
 
     public int currentSpeed = 0;
+>>>>>>> origin/HEAD
 	public float[] speeds = new float[6] { 4f, 2f, 3f, 4f, 5f, 6f };
 	public float[] maxFallSpeeds = new float[6];
 	public float[] gravities = new float[6] { 9.81f, 9.81f, 9.81f, 9.81f, 9.81f, 9.81f };
@@ -32,27 +36,33 @@ public class Surfer : MonoBehaviour {
 	void Update () {
 		if (Input.GetButtonDown ("Jump") && canjump && !jumping) {
 			GetComponent<Animator> ().Play ("jump");
-			fallSpeed = speeds[currentSpeed] * 1.5f;
+			fallSpeed = speeds[Train.level] * 1.5f;
 			grounded = 0;
 			jumping = true;
 			turning = false;
 			canjump = false;
 		}
+<<<<<<< HEAD
+		if (jumping) {
+			if (Input.GetButton ("Jump")) {
+				transform.RotateAround (GetComponent<Collider2D> ().bounds.center, Vector3.back, -turnRatesJump[Train.level] * Time.deltaTime);
+=======
         /* Inputs mobile*/
         MobileJump();
         if (jumping) {
 			if (Input.GetButton ("Jump") || Input.touchCount > 0) {
 				transform.RotateAround (GetComponent<Collider2D> ().bounds.center, Vector3.back, -turnRatesJump[currentSpeed] * Time.deltaTime);
+>>>>>>> origin/HEAD
 			} else {
 				float angle = Quaternion.Angle (transform.rotation, Quaternion.identity);
 				if (angle > 2.0f)
-					transform.RotateAround (GetComponent<Collider2D> ().bounds.center, Vector3.back, (transform.right.y > 0 ? 1f : -1f) * turnRatesJump[currentSpeed] * Time.deltaTime);
+					transform.RotateAround (GetComponent<Collider2D> ().bounds.center, Vector3.back, (transform.right.y > 0 ? 1f : -1f) * turnRatesJump[Train.level] * Time.deltaTime);
 			}
 		}
 		if (grounded > 0) {
 			fallSpeed = Mathf.Max (0f, fallSpeed);
 		} else {
-			fallSpeed -= gravities[currentSpeed] * Time.deltaTime;
+			fallSpeed -= gravities[Train.level] * Time.deltaTime;
 			fallSpeed = Mathf.Max (maxFallSpeed, fallSpeed);
 		}
 		transform.position += new Vector3 (0f, grounded > 0 ? 0f : fallSpeed * Time.deltaTime);

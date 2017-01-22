@@ -5,9 +5,10 @@ public class DecorScrolling : MonoBehaviour
 {
 
     public float speed = -3f;
+	public float scale = 1f;
 
     void Update()
     {
-        transform.Translate(speed * Time.deltaTime, 0f, 0f);
+        transform.Translate(speed * scale * Time.deltaTime, 0f, 0f);
     }
 }
