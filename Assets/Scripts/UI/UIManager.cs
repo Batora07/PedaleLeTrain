@@ -69,4 +69,9 @@ public class UIManager : MonoBehaviour
         }
 
     }
+
+    public void Play()
+    {
+        SceneManager.LoadScene(1);
+    }
 }
