@@ -9,8 +9,10 @@ public class UIManager : MonoBehaviour
     public bool paused;
     private GameObject textPauseGame;
     private GameObject pauseRestartInput;
+	private GameObject button_return;
+	private GameObject button_replay;
 
-    private UIManager() { }
+	private UIManager() { }
 
     public static UIManager Instance
     {
@@ -41,9 +43,15 @@ public class UIManager : MonoBehaviour
     {
         textPauseGame = GameObject.Find("PauseTextMessageOnScreen");
         pauseRestartInput = GameObject.Find("PauseRestartInput");
-        if (textPauseGame != null){
-            textPauseGame.GetComponent<Text>().enabled = false;
-        }
+		button_replay = GameObject.Find("Button_replay");
+		button_return = GameObject.Find("Button_return");
+
+		if (textPauseGame != null){
+			Time.timeScale = 1;
+			textPauseGame.GetComponent<Text>().enabled = false;
+			button_replay.SetActive(false);
+			button_return.SetActive(false);
+		}
 
     }
 
@@ -62,12 +70,16 @@ public class UIManager : MonoBehaviour
         {
             Time.timeScale = 0;
             textPauseGame.GetComponent<Text>().enabled = true;
-            pauseRestartInput.GetComponent<Image>().sprite = Resources.Load<Sprite>("Play_button");
+			button_replay.SetActive(true);
+			button_return.SetActive(true);
+			pauseRestartInput.GetComponent<Image>().sprite = Resources.Load<Sprite>("Play_button");
         }
         else if (!paused)
         {
             Time.timeScale = 1;
-            textPauseGame.GetComponent<Text>().enabled = false;
+			button_replay.SetActive(false);
+			button_return.SetActive(false);
+			textPauseGame.GetComponent<Text>().enabled = false;
             pauseRestartInput.GetComponent<Image>().sprite = Resources.Load<Sprite>("Pause_button");
         }
 
