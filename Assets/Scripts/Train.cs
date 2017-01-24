@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Train : MonoBehaviour {
 	public Wagon[] wagons = new Wagon[3];
 	public Passenger[] passengers = new Passenger[6];
+	public Text scoreText;
 	private int currentWagon = 0;
 	public static int level {
 		get;
@@ -29,6 +32,7 @@ public class Train : MonoBehaviour {
 		audio = GetComponent<AudioSource>();
 		boos = new List<AudioClip>();
 		cheers = new List<AudioClip>();
+		
 		for (int i = 1; ; i++)
 		{
 			var clip = Resources.Load("Audio/Finals/Boo" + i);
@@ -45,10 +49,17 @@ public class Train : MonoBehaviour {
 		}
 	}
 
+	private void Update()
+	{
+		scoreText.text = "Tricks Points : " + score;
+	}
+
 	void Start () {
 		level = 0;
 		score = 0;
 		lost = false;
+
+		scoreText.enabled = true;
 
 		StartCoroutine (LateStart (.1f));
 	}
@@ -62,9 +73,11 @@ public class Train : MonoBehaviour {
 		wagons[currentWagon].Detach ();
 		currentWagon++;
 		if (currentWagon >= wagons.Length) {
-			Debug.Log ("Lost : " + score);
+			//Debug.Log ("Lost : " + score);
 			lost = true;
 			Time.timeScale = 0f;
+			scoreText.enabled = false;
+			SceneManager.LoadScene(3);
 		}
 	}
 
@@ -79,7 +92,7 @@ public class Train : MonoBehaviour {
 				level--;
 				passengers[level].SetTired (false);
 			}
-			score += value;
+			AddScore(value*2);  
 		} else
 		{
 			audio.clip = boos[Random.Range(0, boos.Count)];
@@ -101,5 +114,6 @@ public class Train : MonoBehaviour {
 
 	public static void AddScore (int value) {
 		score += value;
+		//Debug.Log("score =" + score);
 	}
 }
