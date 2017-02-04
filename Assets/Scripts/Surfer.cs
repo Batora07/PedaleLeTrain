@@ -25,6 +25,7 @@ public class Surfer : MonoBehaviour {
 	public float[] turnRatesJump = new float[6] { 360.0f, 360.0f, 360.0f, 360.0f, 360.0f, 360.0f };
 
 	private float startX;
+	private float startY;
 
 	private float trickRotation = 0f;
 
@@ -64,8 +65,9 @@ public class Surfer : MonoBehaviour {
 			fallSpeed -= gravities[Train.level] * Time.deltaTime;
 			fallSpeed = Mathf.Max (maxFallSpeed, fallSpeed);
 		}
-		transform.position += new Vector3 (0f, grounded > 0 ? 0f : fallSpeed * Time.deltaTime);
-		transform.position = new Vector3 (startX, transform.position.y);
+		transform.position += new Vector3(0f, grounded > 0 ? 0f : fallSpeed * Time.deltaTime);
+		transform.position = new Vector3(startX, transform.position.y);
+
 		if (grounded > 0 || turning) {
 			float angle = Quaternion.Angle (transform.rotation, targetRotation);
 			if (angle <= 5.0f) {
@@ -83,6 +85,7 @@ public class Surfer : MonoBehaviour {
 			Train.AddScore (5);
 			return;
 		}
+
 		if (fallSpeed < 0 || grounded <= 0) {
 			if (jumping && !turning) {
 				bool success = Vector3.Angle (transform.right, coll.transform.up) < 90;
@@ -97,6 +100,7 @@ public class Surfer : MonoBehaviour {
 				}
 				train.Trick (success, score);
 			}
+
 			turning = true;
 			jumping = false;
 			trickRotation = 0f;
@@ -110,7 +114,7 @@ public class Surfer : MonoBehaviour {
 	}
 
 	void OnCollisionExit2D (Collision2D coll) {
-		if (grounded > 0) {
+		if (grounded > 0 && coll.gameObject.tag != "Collector") {
 			grounded--;
 		}
 	}

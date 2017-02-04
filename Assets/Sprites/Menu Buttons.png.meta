@@ -1,0 +1,383 @@
+fileFormatVersion: 2
+guid: b953902b04c43a44aaecfc1d5ad33bec
+timeCreated: 1486243135
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Menu Buttons_0
+    21300002: Menu Buttons_1
+    21300004: Menu Buttons_2
+    21300006: Menu Buttons_3
+    21300008: Menu Buttons_4
+    21300010: MenuLeaderBoard
+    21300012: Menu Buttons_6
+    21300014: menuSoundOn
+    21300016: MenuSoundOff
+    21300018: Menu Buttons_9
+    21300020: Menu Buttons_10
+    21300022: Menu Buttons_11
+    21300024: Menu Buttons_12
+    21300026: menuSetting
+    21300028: Menu Buttons_5
+    21300030: MenuCloseButton
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -3
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: Menu Buttons_0
+      rect:
+        serializedVersion: 2
+        x: 397
+        y: 202
+        width: 54
+        height: 278
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 16, y: -138}
+        - {x: 16, y: -139}
+        - {x: 21, y: -139}
+        - {x: 23, y: -137}
+        - {x: 23, y: -135}
+        - {x: 20, y: -134}
+      - - {x: -21, y: 139}
+        - {x: -27, y: 126}
+        - {x: -27, y: -117}
+        - {x: -17, y: -120}
+        - {x: 21, y: -120}
+        - {x: 27, y: -110}
+        - {x: 27, y: 135}
+        - {x: 18, y: 139}
+    - name: Menu Buttons_1
+      rect:
+        serializedVersion: 2
+        x: 456
+        y: 223
+        width: 54
+        height: 257
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -22, y: 128.5}
+        - {x: -27, y: 126.5}
+        - {x: -27, y: -117.5}
+        - {x: -21, y: -128.5}
+        - {x: 16, y: -128.5}
+        - {x: 27, y: -118.5}
+        - {x: 27, y: 119.5}
+        - {x: 21, y: 128.5}
+    - name: Menu Buttons_2
+      rect:
+        serializedVersion: 2
+        x: 15
+        y: 334
+        width: 378
+        height: 80
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 189, y: 20}
+        - {x: 175, y: 35}
+        - {x: 164, y: 40}
+        - {x: -164, y: 40}
+        - {x: -175, y: 35}
+        - {x: -188, y: 28}
+        - {x: -189, y: 19}
+        - {x: -189, y: -20}
+        - {x: -175, y: -35}
+        - {x: -164, y: -40}
+        - {x: 164, y: -40}
+        - {x: 175, y: -35}
+        - {x: 188, y: -28}
+        - {x: 189, y: -19}
+    - name: Menu Buttons_3
+      rect:
+        serializedVersion: 2
+        x: 141
+        y: 266
+        width: 21
+        height: 20
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Menu Buttons_4
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 257
+        width: 71
+        height: 72
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -20.5, y: 36}
+        - {x: -35.5, y: 23}
+        - {x: -35.5, y: -27}
+        - {x: -26.5, y: -36}
+        - {x: 20.5, y: -36}
+        - {x: 35.5, y: -30}
+        - {x: 35.5, y: 21}
+        - {x: 20.5, y: 36}
+    - name: MenuLeaderBoard
+      rect:
+        serializedVersion: 2
+        x: 313
+        y: 255
+        width: 75
+        height: 76
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -24.5, y: 38}
+        - {x: -37.5, y: 23}
+        - {x: -37.5, y: -24}
+        - {x: -26.5, y: -31}
+        - {x: -17.5, y: -37}
+        - {x: -15.5, y: -38}
+        - {x: 34.5, y: -38}
+        - {x: 37.5, y: -30}
+        - {x: 37.5, y: 30}
+        - {x: 19.5, y: 38}
+    - name: Menu Buttons_6
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 176
+        width: 70
+        height: 71
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -35, y: -24.5}
+        - {x: -30, y: -35.5}
+        - {x: 32, y: -35.5}
+        - {x: 35, y: -33.5}
+        - {x: 35, y: 34.5}
+        - {x: 34, y: 35.5}
+        - {x: -26, y: 35.5}
+        - {x: -35, y: 28.5}
+    - name: menuSoundOn
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 175
+        width: 70
+        height: 71
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 23, y: 34.5}
+        - {x: 18, y: 35.5}
+        - {x: -19, y: 35.5}
+        - {x: -35, y: 22.5}
+        - {x: -35, y: -29.5}
+        - {x: -22, y: -35.5}
+        - {x: 27, y: -35.5}
+        - {x: 34, y: -26.5}
+        - {x: 35, y: -19.5}
+        - {x: 35, y: 21.5}
+    - name: MenuSoundOff
+      rect:
+        serializedVersion: 2
+        x: 157
+        y: 175
+        width: 70
+        height: 71
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 35, y: 31.5}
+        - {x: 34, y: 35.5}
+        - {x: -21, y: 35.5}
+        - {x: -35, y: 21.5}
+        - {x: -35, y: -20.5}
+        - {x: -23, y: -35.5}
+        - {x: 17, y: -35.5}
+        - {x: 22, y: -31.5}
+        - {x: 28, y: -26.5}
+        - {x: 35, y: -21.5}
+    - name: Menu Buttons_9
+      rect:
+        serializedVersion: 2
+        x: 234
+        y: 177
+        width: 70
+        height: 71
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 25, y: 35.5}
+        - {x: -32, y: 35.5}
+        - {x: -35, y: 23.5}
+        - {x: -35, y: -25.5}
+        - {x: -26, y: -34.5}
+        - {x: -18, y: -35.5}
+        - {x: 20, y: -35.5}
+        - {x: 35, y: -21.5}
+        - {x: 35, y: 22.5}
+        - {x: 33, y: 33.5}
+    - name: Menu Buttons_10
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 105
+        width: 257
+        height: 54
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -118.5, y: 27}
+        - {x: -128.5, y: 18}
+        - {x: -128.5, y: -27}
+        - {x: 123.5, y: -27}
+        - {x: 128.5, y: -14}
+        - {x: 128.5, y: 16}
+        - {x: 119.5, y: 27}
+    - name: Menu Buttons_11
+      rect:
+        serializedVersion: 2
+        x: 309
+        y: 98
+        width: 74
+        height: 73
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -20, y: 36.5}
+        - {x: -37, y: 30.5}
+        - {x: -37, y: -30.5}
+        - {x: -25, y: -36.5}
+        - {x: 29, y: -36.5}
+        - {x: 37, y: -24.5}
+        - {x: 37, y: 22.5}
+        - {x: 24, y: 36.5}
+    - name: Menu Buttons_12
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 31
+        width: 257
+        height: 54
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -118.5, y: 27}
+        - {x: -128.5, y: 18}
+        - {x: -128.5, y: -27}
+        - {x: 123.5, y: -27}
+        - {x: 128.5, y: -14}
+        - {x: 128.5, y: 16}
+        - {x: 119.5, y: 27}
+    - name: menuSetting
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 248
+        width: 80
+        height: 81
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -40, y: 40.5}
+        - {x: -40, y: -27.5}
+        - {x: -34, y: -40.5}
+        - {x: 22, y: -40.5}
+        - {x: 40, y: -23.5}
+        - {x: 40, y: 35.5}
+        - {x: 28, y: 40.5}
+    - name: Menu Buttons_5
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 256
+        width: 71
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -35.5, y: 36}
+        - {x: -35.5, y: -36}
+        - {x: 30.5, y: -36}
+        - {x: 35.5, y: -22}
+        - {x: 35.5, y: 36}
+    - name: MenuCloseButton
+      rect:
+        serializedVersion: 2
+        x: 310
+        y: 177
+        width: 75
+        height: 75
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -25.5, y: 37.5}
+        - {x: -37.5, y: 33.5}
+        - {x: -37.5, y: -22.5}
+        - {x: -20.5, y: -37.5}
+        - {x: 31.5, y: -37.5}
+        - {x: 37.5, y: -21.5}
+        - {x: 37.5, y: 27.5}
+        - {x: 29.5, y: 37.5}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

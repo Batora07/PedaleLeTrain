@@ -87,8 +87,14 @@ public class UIManager : MonoBehaviour
 
     public void Play()
     {
-        SceneManager.LoadScene(1);
+		Invoke("PlayTheGame", 3.0f);
     }
+
+	// needs delay to create Beziers curves
+	public void PlayTheGame()
+	{
+		SceneManager.LoadScene(1);
+	}
 
     public void ShowCredits()
     {

@@ -114,6 +114,5 @@ public class Train : MonoBehaviour {
 
 	public static void AddScore (int value) {
 		score += value;
-		//Debug.Log("score =" + score);
 	}
 }

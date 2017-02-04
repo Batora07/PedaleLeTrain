@@ -4,32 +4,68 @@ using UnityEngine.SceneManagement;
 
 public class MusicScript : MonoBehaviour
 {
-	public GameObject musicPlayer;
+	public static MusicScript instance;
+	private AudioSource bgMusic;
+	private float time;
+
 	void Awake()
 	{
+		MakeSingleton();
+		AudioSource[] audioSources = GetComponents<AudioSource>();
 		//When the scene loads it checks if there is an object called "MUSIC".
-		musicPlayer = GameObject.Find("SoundScape");
-		if (musicPlayer == null)
+		bgMusic = audioSources[0];
+	}
+
+	void MakeSingleton() {  
+		if(instance != null)
 		{
-			//If this object does not exist then it does the following:
-			//1. Sets the object this script is attached to as the music player
-			musicPlayer = this.gameObject;
-			//2. Renames THIS object to "MUSIC" for next time
-			musicPlayer.name = "SoundScape";
-			//3. Tells THIS object not to die when changing scenes.
-			DontDestroyOnLoad(musicPlayer);
+			Destroy(gameObject);
 		}
 		else
 		{
-			if (this.gameObject.name != "SoundScape")
+			instance = this;
+			DontDestroyOnLoad(gameObject);
+		}
+	}
+
+	public void StopBGMusic()
+	{
+		if (bgMusic.isPlaying)
+		{
+			bgMusic.Stop();
+		}
+	}
+
+	private void OnLevelWasLoaded(int level)
+	{
+		if(Application.loadedLevelName == "MainMenu")
+		{
+			if (GameController.instance.isMusicOn)
 			{
-				//If there WAS an object in the scene called "MUSIC" (because we have come back to
-				//the scene where the music was started) then it just tells this object to 
-				//destroy itself if this is not the original
-				Destroy(this.gameObject);
+				if (!bgMusic.isPlaying)
+				{
+					bgMusic.time = time;
+					bgMusic.Play();
+				}
 			}
 		}
+	}
 
+	public void GameIsLoadedTurnOfMusic()
+	{
+		if (bgMusic.isPlaying)
+		{
+			time = bgMusic.time;
+			bgMusic.Stop();
+		}
+	}
+
+	public void PlayBGMusic()
+	{
+		if (!bgMusic.isPlaying)
+		{
+			bgMusic.Play();
+		}
 	}
 }
 
